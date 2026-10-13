@@ -1,2 +1,1 @@
-# My-Portfolio
-Hi! I'm a 3rd-year IT student exploring tech and creative web design. I built this portfolio using HTML and CSS with the help of AI to practice vibe coding and learn layout design. It features my projects and hobbies like mobile photography. This site is still a work in progress, and I'll keep updating it as I build more projects!
+Welcome! I built this portfolio with AI to showcase my projects, skills, photography, and hobbies. I'll keep updating it as I create new things!
