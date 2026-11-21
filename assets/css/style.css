@@ -1364,8 +1364,12 @@ a.contact-link {
   }
 
   .hero-buttons {
+    width: fit-content;
+    max-width: 220px;
+    margin-inline: auto;
     display: grid;
     grid-template-columns: 1fr;
+    gap: 12px;
   }
 
   .project-links {
@@ -1375,7 +1379,8 @@ a.contact-link {
 
   .btn,
   .project-links .btn {
-    width: 100%;
+    width: 220px;
+    max-width: 100%;
     min-height: 44px;
     align-items: center;
     justify-content: center;
