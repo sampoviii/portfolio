@@ -70,37 +70,97 @@ if ('IntersectionObserver' in window) {
 }
 
 const navLinks = document.querySelectorAll('.nav-links a');
+const navbar = document.querySelector('.navbar');
+const navToggle = document.getElementById('navToggle');
+const navMenu = document.getElementById('navLinks');
+
+function setMobileMenu(open) {
+  if (!navbar || !navToggle) return;
+  navbar.classList.toggle('menu-open', open);
+  navToggle.setAttribute('aria-expanded', String(open));
+  navToggle.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+  if (navMenu) {
+    navMenu.setAttribute('aria-hidden', String(window.innerWidth <= 768 && !open));
+  }
+}
+
+if (navToggle && navMenu) {
+  setMobileMenu(false);
+
+  navToggle.addEventListener('click', () => {
+    setMobileMenu(navToggle.getAttribute('aria-expanded') !== 'true');
+  });
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      setMobileMenu(false);
+      navigationLockUntil = Date.now() + 1400;
+      setActiveLink(link.hash.slice(1));
+    });
+  });
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+      if (navToggle.getAttribute('aria-expanded') === 'true') {
+        setMobileMenu(false);
+        navToggle.focus();
+      }
+    }
+  });
+
+  document.addEventListener('click', event => {
+    if (navbar && !navbar.contains(event.target)) setMobileMenu(false);
+  });
+
+  window.addEventListener('resize', () => {
+    setMobileMenu(false);
+  });
+}
+
 const sections = Array.from(navLinks)
   .map(link => document.getElementById(link.hash.slice(1)))
   .filter(Boolean);
 
-if ('IntersectionObserver' in window) {
-  const navObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      navLinks.forEach(link => link.classList.remove('active'));
-      const activeLink = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
-      if (activeLink) activeLink.classList.add('active');
-    });
-  }, { threshold: 0.4 });
-  sections.forEach(section => navObserver.observe(section));
-} else {
-  const updateActiveLink = () => {
-    let activeSection = null;
-    sections.forEach(section => {
-      if (section.getBoundingClientRect().top <= window.innerHeight * 0.4) {
-        activeSection = section;
-      }
-    });
-    navLinks.forEach(link => link.classList.remove('active'));
-    if (activeSection) {
-      const activeLink = document.querySelector(`.nav-links a[href="#${activeSection.id}"]`);
-      if (activeLink) activeLink.classList.add('active');
-    }
-  };
-  window.addEventListener('scroll', updateActiveLink);
-  updateActiveLink();
+let activeLinkFrame = null;
+let navigationLockUntil = 0;
+
+function setActiveLink(sectionId) {
+  navLinks.forEach(link => {
+    link.classList.toggle('active', link.hash === `#${sectionId}`);
+  });
 }
+
+function updateActiveLink() {
+  if (!sections.length) return;
+  if (Date.now() < navigationLockUntil) return;
+
+  const marker = window.innerHeight * 0.32;
+  let activeSection = sections[0];
+
+  sections.forEach(section => {
+    if (section.getBoundingClientRect().top <= marker) {
+      activeSection = section;
+    }
+  });
+
+  if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) {
+    activeSection = sections[sections.length - 1];
+  }
+
+  setActiveLink(activeSection.id);
+}
+
+function requestActiveLinkUpdate() {
+  if (activeLinkFrame !== null) return;
+  activeLinkFrame = window.requestAnimationFrame(() => {
+    activeLinkFrame = null;
+    updateActiveLink();
+  });
+}
+
+window.addEventListener('scroll', requestActiveLinkUpdate, { passive: true });
+window.addEventListener('resize', requestActiveLinkUpdate);
+updateActiveLink();
 
 function animateCounter(element, target, duration) {
   if (prefersReducedMotion) {
