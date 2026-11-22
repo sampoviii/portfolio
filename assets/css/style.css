@@ -20,6 +20,10 @@
   --footer-brand:#e07a5f;
   --bar-track:   #c8e6c9;
   --theme-speed: 0.35s;
+  --motion-duration: 0.22s;
+  --motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --hover-lift: -3px;
+  --hover-shadow: 9px;
 }
 
 body.dark {
@@ -104,8 +108,8 @@ img {
   box-shadow: 4px 4px 0px var(--shadow);
   cursor: pointer;
   white-space: nowrap;
-  transition: transform 0.18s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.18s cubic-bezier(0.22, 1, 0.36, 1),
+  transition: transform var(--motion-duration) var(--motion-ease),
+              box-shadow var(--motion-duration) var(--motion-ease),
               background-color var(--theme-speed) ease,
               border-color var(--theme-speed) ease,
               color var(--theme-speed) ease;
@@ -219,8 +223,8 @@ img {
   background: var(--surface);
   box-shadow: 4px 4px 0 var(--accent-dark);
   cursor: pointer;
-  transition: transform 0.18s ease,
-              box-shadow 0.18s ease,
+  transition: transform var(--motion-duration) var(--motion-ease),
+              box-shadow var(--motion-duration) var(--motion-ease),
               border-color var(--theme-speed) ease,
               background-color var(--theme-speed) ease;
 }
@@ -285,7 +289,10 @@ body:not(.dark) .nav-toggle[aria-expanded="true"]:hover {
 
 .nav-toggle:focus-visible,
 .back-btn:focus-visible,
-.btn:focus-visible {
+.btn:focus-visible,
+.theme-toggle:focus-visible,
+.cursor-toggle:focus-visible,
+.contact-link:focus-visible {
   outline: 3px solid var(--accent);
   outline-offset: 4px;
 }
@@ -297,7 +304,8 @@ body:not(.dark) .nav-toggle[aria-expanded="true"]:hover {
   font-weight: 700;
   position: relative;
   padding: 5px 4px 5px 0;
-  transition: color 0.2s ease, padding-left 0.2s ease;
+  transition: color var(--motion-duration) var(--motion-ease),
+              padding-left var(--motion-duration) var(--motion-ease);
 }
 
 /* ▶ cursor slides in from left on hover / active */
@@ -310,7 +318,8 @@ body:not(.dark) .nav-toggle[aria-expanded="true"]:hover {
   color: var(--accent);
   opacity: 0;
   transform: translate(-6px, -50%);
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition: opacity var(--motion-duration) var(--motion-ease),
+              transform var(--motion-duration) var(--motion-ease);
 }
 
 .nav-links a:hover,
@@ -836,8 +845,8 @@ body.dark .avatar-motto strong {
   border-radius: 4px;
   display: flex;
   flex-direction: column;
-  transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+  transition: transform var(--motion-duration) var(--motion-ease),
+              box-shadow var(--motion-duration) var(--motion-ease),
               background-color var(--theme-speed) ease,
               border-color var(--theme-speed) ease;
 }
@@ -911,7 +920,7 @@ body.dark .avatar-motto strong {
   object-fit: cover;
   display: block;
   border-radius: 2px;
-  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform var(--motion-duration) var(--motion-ease);
 }
 
 .project-card:hover .project-screenshot {
@@ -1087,7 +1096,7 @@ body.dark .hobby-icon-dark {
   height: 200px;
   object-fit: cover;
   display: block;
-  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform var(--motion-duration) var(--motion-ease);
 }
 
 .video-box {
@@ -1168,7 +1177,8 @@ body.dark .hobby-icon-dark {
   color: var(--accent);
   font-weight: 700;
   word-break: break-all;
-  transition: opacity 0.2s ease;
+  transition: opacity var(--motion-duration) var(--motion-ease),
+              text-shadow var(--motion-duration) var(--motion-ease);
 }
 
 a.contact-link {
@@ -1364,7 +1374,7 @@ a.contact-link {
   }
 
   .hero-buttons {
-    width: fit-content;
+    width: 55%;
     max-width: 220px;
     margin-inline: auto;
     display: grid;
@@ -1372,18 +1382,50 @@ a.contact-link {
     gap: 12px;
   }
 
-  .project-links {
-    display: grid;
-    grid-template-columns: 1fr;
+  .hero-buttons .btn {
+    width: 100%;
+    max-width: none;
   }
 
-  .btn,
-  .project-links .btn {
-    width: 220px;
+  .hero-avatar {
+    width: min(78vw, 320px);
+  }
+
+  .avatar-scene {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 240 / 280;
+  }
+
+  .avatar-motto {
+    width: 100%;
+  }
+
+  .project-links {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    align-items: stretch;
+  }
+
+  .btn {
+    width: auto;
     max-width: 100%;
-    min-height: 44px;
+    min-height: 40px;
+    padding: 8px 12px;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
+    font-size: 11px;
+    white-space: normal;
+    text-align: center;
+  }
+
+  .project-links .btn {
+    width: 100%;
+    min-height: 40px;
+    padding: 8px 6px;
+    font-size: 10px;
   }
 
   .section {
@@ -1404,14 +1446,7 @@ a.contact-link {
     padding: 40px 20px;
   }
 
-  .avatar-scene {
-    width: 180px;
-    height: 210px;
-    perspective: 700px;
-  }
-
   .avatar-motto {
-    width: 180px;
     min-height: 88px;
     padding: 12px 12px;
   }
@@ -1684,7 +1719,7 @@ body.dark .pixel-particles span {
   .btn {
     display: inline-flex;
     align-items: center;
-    min-height: 44px;
+    min-height: 40px;
   }
 
   .btn {
@@ -1762,8 +1797,8 @@ body.dark .pixel-particles span {
 .project-card.reveal-complete,
 .contact-card.reveal-complete,
 .gallery-item.reveal-complete {
-  transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+  transition: transform var(--motion-duration) var(--motion-ease),
+              box-shadow var(--motion-duration) var(--motion-ease),
               background-color var(--theme-speed) ease,
               border-color var(--theme-speed) ease;
   transition-delay: 0s;
@@ -1779,13 +1814,13 @@ body.dark .pixel-particles span {
 .project-card:hover,
 .contact-card:hover,
 .edu-card:hover {
-  transform: translate(-3px, -3px);
-  box-shadow: 9px 9px 0px var(--shadow);
+  transform: translate(var(--hover-lift), var(--hover-lift));
+  box-shadow: var(--hover-shadow) var(--hover-shadow) 0px var(--shadow);
 }
 
 .gallery-item:hover {
-  transform: translate(-3px, -3px);
-  box-shadow: 9px 9px 0px var(--shadow);
+  transform: translate(var(--hover-lift), var(--hover-lift));
+  box-shadow: var(--hover-shadow) var(--hover-shadow) 0px var(--shadow);
 }
 
 /* ── Gallery photo zoom on hover ── */
@@ -1950,8 +1985,8 @@ body.dark .pixel-particles span {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+  transition: transform var(--motion-duration) var(--motion-ease),
+              box-shadow var(--motion-duration) var(--motion-ease),
               background-color var(--theme-speed) ease,
               border-color var(--theme-speed) ease;
   line-height: 1;
@@ -1982,8 +2017,8 @@ body.dark .pixel-particles span {
   background-color: var(--surface);
   cursor: pointer;
   border-radius: 2px;
-  transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+  transition: transform var(--motion-duration) var(--motion-ease),
+              box-shadow var(--motion-duration) var(--motion-ease),
               background-color var(--theme-speed) ease,
               border-color var(--theme-speed) ease;
 }
