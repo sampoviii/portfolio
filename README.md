@@ -1,0 +1,2 @@
+Welcome to my personal portfolio repository! This highlights my journey into IT, the skills and tools I use, featured software and web projects, personal hobbies, and how to get in touch. I'll continue to keep this updated as I build and learn more.
+![Paimon dancing](https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3b21lMmZsZTk2NTFqaWdqdjMwczA3MXY4eDc0ZnRoMTd6NGhobzBrayZlcD12MV9naWZzX3JlbGF0ZWQmY3Q9Zw/U2xLQLGBJYHvlWFv9N/giphy.gif)
