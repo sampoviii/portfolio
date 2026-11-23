@@ -2,11 +2,11 @@
   const body = document.body;
   const avatarImages = {
     light: {
-      front: 'assets/images/my_photo1.png',
+      front: 'assets/images/optimized/my_photo1.jpg',
       back: 'https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExeGpnaGlwNDkyYTR4Z2lqb2x1MjI3bGVlMTV2bWJxZ2Y1N2J2eDgwMiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/tvywhzr7zyOUne7HjA/giphy.gif'
     },
     dark: {
-      front: 'assets/images/my_photo2.png',
+      front: 'assets/images/optimized/my_photo2.jpg',
       back: 'https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExY2F3ZDN4cGI2dWd0b2s3c2RkdzdkMXF5bWs1NmY1aXlwZGhjczl0MSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Srr4SbJIGrQQ9dF6mY/giphy.gif'
     }
   };

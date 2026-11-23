@@ -64,6 +64,11 @@
 .gallery-page .gallery-item:nth-child(10) { transition-delay: 0.45s; }
 .gallery-page .gallery-item:nth-child(11) { transition-delay: 0.50s; }
 .gallery-page .gallery-item:nth-child(12) { transition-delay: 0.55s; }
+.gallery-page .gallery-item:nth-child(13) { transition-delay: 0.60s; }
+.gallery-page .gallery-item:nth-child(14) { transition-delay: 0.65s; }
+.gallery-page .gallery-item:nth-child(15) { transition-delay: 0.70s; }
+.gallery-page .gallery-item:nth-child(16) { transition-delay: 0.75s; }
+.gallery-page .gallery-item:nth-child(17) { transition-delay: 0.80s; }
 
 .gallery-page .gallery-item.reveal-complete {
   transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),

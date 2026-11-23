@@ -65,7 +65,7 @@ if (typeof window.matchMedia === 'function'
     cursor.classList.toggle('is-pickaxe', style === 'pickaxe');
     cursor.classList.toggle('is-pointer', style === 'pointer');
     cursorImage.src = style === 'pickaxe'
-      ? 'assets/images/pickaxe.png'
+      ? 'assets/images/optimized/pickaxe.png'
       : 'assets/images/optimized/default_cursor.png';
 
     if (style === 'pointer') {
