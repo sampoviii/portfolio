@@ -218,3 +218,36 @@ if (avatarCard) {
     }, prefersReducedMotion ? 0 : 1000);
   });
 }
+
+const projectCarousel = document.querySelector('[data-project-carousel]');
+if (projectCarousel) {
+  const projectTrack = projectCarousel.querySelector('[data-carousel-track]');
+  const previousProjectButton = projectCarousel.querySelector('[data-carousel-prev]');
+  const nextProjectButton = projectCarousel.querySelector('[data-carousel-next]');
+
+  if (projectTrack && previousProjectButton && nextProjectButton) {
+    const updateProjectCarouselButtons = () => {
+      const maxScroll = projectTrack.scrollWidth - projectTrack.clientWidth;
+      previousProjectButton.disabled = projectTrack.scrollLeft <= 1;
+      nextProjectButton.disabled = maxScroll <= 1
+        || projectTrack.scrollLeft >= maxScroll - 1;
+    };
+
+    const scrollProject = direction => {
+      const firstProject = projectTrack.querySelector('.project-card');
+      if (!firstProject) return;
+
+      const gap = parseFloat(window.getComputedStyle(projectTrack).columnGap) || 0;
+      projectTrack.scrollBy({
+        left: direction * (firstProject.getBoundingClientRect().width + gap),
+        behavior: prefersReducedMotion ? 'auto' : 'smooth'
+      });
+    };
+
+    previousProjectButton.addEventListener('click', () => scrollProject(-1));
+    nextProjectButton.addEventListener('click', () => scrollProject(1));
+    projectTrack.addEventListener('scroll', updateProjectCarouselButtons, { passive: true });
+    window.addEventListener('resize', updateProjectCarouselButtons);
+    updateProjectCarouselButtons();
+  }
+}

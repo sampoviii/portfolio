@@ -321,7 +321,8 @@
 
     <p class="projects-subheading">// Website Projects</p>
 
-    <div class="projects-grid">
+    <div class="projects-carousel" data-project-carousel>
+      <div class="projects-grid projects-grid--carousel" id="website-project-track" data-carousel-track>
 
       <!-- Project 1 -->
       <div class="project-card reveal">
@@ -432,6 +433,38 @@
         </div>
       </div>
 
+      <!-- Project 4 -->
+      <div class="project-card reveal">
+        <div class="project-terminal-bar">
+          <span class="terminal-dot dot-red"></span>
+          <span class="terminal-dot dot-yellow"></span>
+          <span class="terminal-dot dot-green"></span>
+          <span class="terminal-title">pixel-planter/index.html</span>
+        </div>
+        <div class="project-img">
+          <img src="assets/images/optimized/pixel_planter.jpg" alt="Pixel Planter gardening game" class="project-screenshot" loading="lazy" decoding="async" />
+        </div>
+        <h3 class="project-title">Pixel Planter</h3>
+        <p class="project-desc">
+          A solo browser-based gardening mini-game built with HTML, CSS, and JavaScript. Place pots around your garden, plant marigold seeds, and care for them with water and fertilizer as they grow. Harvest mature plants to collect more seeds. I drew the pixel-art sprites myself and used AI-assisted coding during development.
+        </p>
+        <div class="project-tags">
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">Kiro AI</span>
+          <span class="tag">Pixel Art</span>
+          <span class="tag">Mini Game</span>
+        </div>
+        <div class="project-links">
+          <a href="https://sampoviii.github.io/pixel-planter/" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-primary">View Demo</a>
+          <a href="https://github.com/sampoviii/pixel-planter" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-secondary">Repository</a>
+        </div>
+      </div>
+
+      </div>
+      <button class="btn btn-secondary projects-carousel-button" type="button" data-carousel-prev aria-label="Previous project" aria-controls="website-project-track" disabled>&lt;</button>
+      <button class="btn btn-secondary projects-carousel-button" type="button" data-carousel-next aria-label="Next project" aria-controls="website-project-track">&gt;</button>
     </div>
 
     <!-- Figma Prototype Projects -->
